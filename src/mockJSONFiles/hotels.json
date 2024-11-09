@@ -1,0 +1,211 @@
+[
+  {
+    "id": 1,
+    "name": "Grand Plaza Hotel",
+    "location": "New York, NY",
+    "rating": 4.5,
+    "amenities": ["Free WiFi", "Swimming Pool", "Spa", "Restaurant", "Gym"],
+    "price_per_night": 150,
+    "description": "A luxurious hotel in the heart of New York City, featuring world-class amenities and excellent service.",
+    "images": [
+      "url1.jpg",
+      "url2.jpg"
+    ],
+    "contact_info": {
+      "phone": "+1 555-1234",
+      "email": "contact@grandplaza.com",
+      "address": "123 Grand Plaza St, New York, NY"
+    },
+    "reviews": [
+      { "user": "John Doe", "rating": 5, "comment": "Amazing experience!" },
+      { "user": "Jane Smith", "rating": 4, "comment": "Very comfortable stay." }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Seaside Resort",
+    "location": "Miami, FL",
+    "rating": 4.0,
+    "amenities": ["Beach Access", "Free Breakfast", "Swimming Pool", "Bar"],
+    "price_per_night": 200,
+    "description": "A tropical paradise offering direct beach access and stunning views of the ocean.",
+    "images": [
+      "url3.jpg",
+      "url4.jpg"
+    ],
+    "contact_info": {
+      "phone": "+1 555-5678",
+      "email": "info@seasideresort.com",
+      "address": "789 Ocean Dr, Miami, FL"
+    },
+    "reviews": [
+      { "user": "Alice Brown", "rating": 4, "comment": "Great location and views!" }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Cozy Mountain Lodge",
+    "location": "Lake Tahoe, CA",
+    "rating": 4.8,
+    "amenities": ["Ski-in/Ski-out Access", "Hot Tub", "Fireplace", "Restaurant", "Game Room"],
+    "price_per_night": 120,
+    "description": "A charming lodge nestled in the mountains, offering breathtaking views and cozy accommodations.",
+    "images": [
+      "url5.jpg",
+      "url6.jpg"
+    ],
+    "contact_info": {
+      "phone": "+1 555-9012",
+      "email": "reservations@cozylodge.com",
+      "address": "456 Pinewood Dr, Lake Tahoe, CA"
+    },
+    "reviews": []
+  },
+  {
+    "id": 4,
+    "name": "City Center Hotel",
+    "location": "London, UK",
+    "rating": 4.2,
+    "amenities": ["Free WiFi", "Fitness Center", "Business Center, Restaurant, Bar"],
+    "price_per_night": 180,
+    "description": "A modern hotel in the heart of London, perfect for business and leisure travelers.",
+    "images": [
+      "url7.jpg",
+      "url8.jpg"
+    ],
+    "contact_info": {
+      "phone": "+44 20 7123 4567",
+      "email": "info@citycenterhotel.com",
+      "address": "123 City Center St, London, UK"
+    },
+    "reviews": [
+      { "user": "David Lee", "rating": 4, "comment": "Convenient location and friendly staff." }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Tropical Beach Resort",
+    "location": "Cancun, Mexico",
+    "rating": 4.7,
+    "amenities": ["Beach Access", "Swimming Pool, Water Sports, Spa, Restaurants"],
+    "price_per_night": 250,
+    "description": "A luxurious beachfront resort offering a wide range of activities and relaxation options.",
+    "images": [
+      "url9.jpg",
+      "url10.jpg"
+    ],
+    "contact_info": {
+      "phone": "+52 998 888 7777",
+      "email": "reservations@tropicalresort.com",
+      "address": "789 Playa del Carmen, Cancun, Mexico"
+    },
+    "reviews": [
+      { "user": "Emily Carter", "rating": 5, "comment": "Paradise found!" }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Historic Boutique Hotel",
+    "location": "Paris, France",
+    "rating": 4.9,
+    "amenities": ["Free WiFi, Concierge Service, Restaurant, Bar"],
+    "price_per_night": 300,
+    "description": "A charming boutique hotel housed in a historic building, offering elegant accommodations and personalized service.",
+    "images": [
+      "url11.jpg",
+      "url12.jpg"
+    ],
+    "contact_info": {
+      "phone": "+33 1 23 45 67 89",
+      "email": "info@historichotel.com",
+      "address": "123 Rue de Rivoli, Paris, France"
+    },
+    "reviews": [
+      { "user": "Frank Miller", "rating": 5, "comment": "A truly unforgettable experience." }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Mountain View Cabin",
+    "location": "Colorado, USA",
+    "rating": 4.6,
+    "amenities": ["Fireplace, Hot Tub, Hiking Trails, BBQ Grill"],
+    "price_per_night": 80,
+    "description": "A cozy cabin with stunning mountain views, perfect for a peaceful getaway.",
+    "images": [
+      "url13.jpg",
+      "url14.jpg"
+    ],
+    "contact_info": {
+      "phone": "+1 303 555 1212",
+      "email": "info@mountainviewcabin.com",
+      "address": "123 Pine Creek Rd, Colorado, USA"
+    },
+    "reviews": [
+      { "user": "Grace Davis", "rating": 4, "comment": "Beautiful scenery and relaxing atmosphere." }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Luxury Villa with Pool",
+    "location": "Bali, Indonesia",
+    "rating": 5.0,
+    "amenities": ["Private Pool, Garden, Butler Service, Spa Treatments"],
+    "price_per_night": 500,
+    "description": "A luxurious villa with stunning architecture and impeccable service, offering ultimate privacy and relaxation.",
+    "images": [
+      "url15.jpg",
+      "url16.jpg"
+    ],
+    "contact_info": {
+      "phone": "+62 361 789 012",
+      "email": "reservations@luxuryvillabali.com",
+      "address": "789 Jalan Ubud, Bali, Indonesia"
+    },
+    "reviews": [
+      { "user": "Henry Wilson", "rating": 5, "comment": "A dream vacation come true!" }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Cityscape Apartment",
+    "location": "Dubai, UAE",
+    "rating": 4.3,
+    "amenities": ["Fitness Center, Swimming Pool, Rooftop Terrace, Concierge Service"],
+    "price_per_night": 100,
+    "description": "A modern apartment with stunning city views, offering a convenient and stylish stay.",
+    "images": [
+      "url17.jpg",
+      "url18.jpg"
+    ],
+    "contact_info": {
+      "phone": "+971 4 567 8901",
+      "email": "info@cityscape.com",
+      "address": "123 Sheikh Zayed Rd, Dubai, UAE"
+    },
+    "reviews": [
+      { "user": "Isabella Ross", "rating": 4, "comment": "Great value for money and excellent location." }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Eco-Friendly Retreat",
+    "location": "Costa Rica",
+    "rating": 4.5,
+    "amenities": ["Yoga Classes, Organic Meals, Hiking Trails, Wildlife Tours"],
+    "price_per_night": 150,
+    "description": "A sustainable retreat surrounded by lush rainforest, offering rejuvenating experiences and connection with nature.",
+    "images": [
+      "url19.jpg",
+      "url20.jpg"
+    ],
+    "contact_info": {
+      "phone": "+506 2234 5678",
+      "email": "info@ecoretreat.com",
+      "address": "123 Selva Verde, Costa Rica"
+    },
+    "reviews": [
+      { "user": "Jack Thompson", "rating": 5, "comment": "A truly transformative experience." }
+    ]
+  }
+]
