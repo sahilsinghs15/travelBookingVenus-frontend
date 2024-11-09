@@ -1,19 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import Footer from "../Components/Footer";
+import { useSelector} from "react-redux";
+import { useNavigate , Link } from "react-router-dom";
+import { useAppDispatch } from "../Helpers/Hooks";
+import { RootState } from "../Redux/store";
+import { logout } from "../Redux/Slices/authSlice.reducer";
+import { ChevronDown, LogOut, User, UserPlus } from "lucide-react";
 
 const Homepage: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const {isLoggedIn , data} = useSelector((state : RootState) => state.auth);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navbar */}
       <nav className="bg-blue-600 text-white py-4 px-8 flex justify-between items-center">
         <div className="text-2xl font-bold">TravelSite</div>
         <ul className="flex space-x-8">
-          <li><a href="#flights" className="hover:text-gray-200">Flights</a></li>
-          <li><a href="#hotels" className="hover:text-gray-200">Hotels</a></li>
-          <li><a href="#about" className="hover:text-gray-200">About Us</a></li>
-          <li><a href="#signup" className="hover:text-gray-200">Sign Up</a></li>
-          <li><a href="#login" className="hover:text-gray-200">Login</a></li>
-          <li><a href="#profile" className="hover:text-gray-200">Profile</a></li>
+          <li><Link to="/" className="hover:text-gray-200">Home</Link></li>
+          <li><Link to="/flights" className="hover:text-gray-200">Flights</Link></li>
+          <li><Link to="/hotels" className="hover:text-gray-200">Hotels</Link></li>
+          <li><Link to="/aboutus" className="hover:text-gray-200">About Us</Link></li>
+          {
+            !isLoggedIn ? (
+              <>
+                <li>
+                    <Link to="/signup" className="hover:text-gray-200">
+                      <UserPlus className="mr-2" /> Signup
+                    </Link>
+
+                    <Link to="/login" className="hover:text-gray-200">
+                      <UserPlus className="mr-2" /> Login
+                    </Link>
+                </li>
+              </>
+            ) : (
+              <li className="relative">
+                  <button
+                    className="flex items-center hover:text-yellow-400"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                  >
+                    <User className="mr-2" />
+                    <span>{data?.fullName}</span>
+                    <ChevronDown className={`ml-2 transform ${dropdownOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-lg py-2 z-10">
+                      <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile{<User/>}</Link>
+                      <button
+                        className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200"
+                        onClick={handleLogout}
+                      >
+                        <LogOut className="inline-block mr-2" /> Logout
+                      </button>
+                    </div>
+                  )}
+                </li>
+            )
+          }
+          <li><Link to="/signup" className="hover:text-gray-200">SignUp</Link></li>
+          <li><Link to="/login" className="hover:text-gray-200">Login</Link></li>
+          <li><Link to="/profile" className="hover:text-gray-200">Profile</Link></li>
         </ul>
       </nav>
 

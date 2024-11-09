@@ -6,6 +6,9 @@ import Denied from "./Pages/Denied";
 import NotFound from "./Pages/NotFound";
 import Aboutus from "./Pages/Aboutus";
 import ProfilePage from "./Components/ProfilePage";
+import FlightsSearchPage from "./Components/FlightsSearchPage";
+import HotelsSearchPage from "./Components/HotelsSearchPage";
+import FlightDetailsPage from "./Components/FlightDetailsPage";
 
 
 function App() {
@@ -17,6 +20,10 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/flights" element={<FlightsSearchPage />} />
+        <Route path="/hotels" element={<HotelsSearchPage />} />
+        <Route path="/flightDetail" element={<FlightDetailsPage />} />
+        <Route path="/aboutus" element={<Aboutus />} />
         <Route path="/denied" element={<Denied />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

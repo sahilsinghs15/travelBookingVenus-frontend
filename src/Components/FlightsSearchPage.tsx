@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import flightsData from "../mockJSONFiles/flights.json";
+import { Link } from "react-router-dom";
 
 interface Flight {
   flight_id: number;
@@ -74,7 +75,7 @@ const FlightsSearchPage: React.FC = () => {
       </div>
 
       {/* Search Results */}
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto" onClick={()=> <Link to="/flightDetail" ></Link>}>
         {results.length > 0 ? (
           results.map((flight: { flight_id: React.Key | null | undefined; airline: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; flight_number: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; origin: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; destination: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; departure_time: string | number | Date; arrival_time: string | number | Date; price: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => (
             <div key={flight.flight_id} className="bg-white p-6 mb-4 rounded-lg shadow-md">
