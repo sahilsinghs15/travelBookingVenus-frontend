@@ -10,7 +10,7 @@ import FlightsSearchPage from "./Components/FlightsSearchPage";
 import HotelsSearchPage from "./Components/HotelsSearchPage";
 import FlightDetailsPage from "./Components/FlightDetailsPage";
 import HotelDetailsPage from "./Components/HotelDetailsPage";
-
+import flightsData from '../src/mockJSONFiles/flights.json'; // Import your data file
 
 function App() {
 
@@ -23,7 +23,13 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/flights" element={<FlightsSearchPage />} />
         <Route path="/hotels" element={<HotelsSearchPage />} />
-        <Route path="/flights/:flightId" element={<FlightDetailsPage />} />
+        
+        {/* Updated this route to render FlightDetailsPage instead of FlightsSearchPage */}
+        <Route 
+          path="/flights/:flightId" 
+          element={<FlightDetailsPage flights={flightsData} />} 
+        />
+        
         <Route path="/hotels/:hotelId" element={<HotelDetailsPage />} />
         <Route path="/aboutus" element={<Aboutus />} />
         <Route path="/denied" element={<Denied />} />
