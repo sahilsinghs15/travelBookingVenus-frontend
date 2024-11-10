@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import hotelsData from "../mockJSONFiles/hotels.json";
+import { Link } from "react-router-dom";
 
 interface Hotel {
   id: number;
@@ -78,23 +79,25 @@ const HotelsSearchPage: React.FC = () => {
       <div className="max-w-3xl mx-auto">
         {results.length > 0 ? (
           results.map((hotel) => (
-            <div key={hotel.id} className="bg-white p-6 mb-4 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold text-blue-800 mb-2">
-                {hotel.name}
-              </h3>
-              <p className="text-gray-700">
-                <span className="font-semibold">Location:</span> {hotel.location}
-              </p>
-              <p className="text-gray-700">
-                <span className="font-semibold">Rating:</span> {hotel.rating} / 5
-              </p>
-              <p className="text-gray-700">
-                <span className="font-semibold">Amenities:</span> {hotel.amenities.join(", ")}
-              </p>
-              <p className="text-gray-700 font-semibold mt-2">
-                Price per Night: ${hotel.price_per_night}
-              </p>
-            </div>
+            <Link to={`/hotels/${hotel.id}`} key={hotel.id}>
+                <div key={hotel.id} className="bg-white p-6 mb-4 rounded-lg shadow-md">
+                <h3 className="text-xl font-semibold text-blue-800 mb-2">
+                    {hotel.name}
+                </h3>
+                <p className="text-gray-700">
+                    <span className="font-semibold">Location:</span> {hotel.location}
+                </p>
+                <p className="text-gray-700">
+                    <span className="font-semibold">Rating:</span> {hotel.rating} / 5
+                </p>
+                <p className="text-gray-700">
+                    <span className="font-semibold">Amenities:</span> {hotel.amenities.join(", ")}
+                </p>
+                <p className="text-gray-700 font-semibold mt-2">
+                    Price per Night: ${hotel.price_per_night}
+                </p>
+                </div>
+            </Link>
           ))
         ) : (
           <p className="text-center text-gray-700 mt-8">No hotels found matching the criteria.</p>

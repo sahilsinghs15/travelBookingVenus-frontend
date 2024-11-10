@@ -9,6 +9,7 @@ import ProfilePage from "./Components/ProfilePage";
 import FlightsSearchPage from "./Components/FlightsSearchPage";
 import HotelsSearchPage from "./Components/HotelsSearchPage";
 import FlightDetailsPage from "./Components/FlightDetailsPage";
+import HotelDetailsPage from "./Components/HotelDetailsPage";
 
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/flights" element={<FlightsSearchPage />} />
         <Route path="/hotels" element={<HotelsSearchPage />} />
-        <Route path="/flightDetail" element={<FlightDetailsPage />} />
+        <Route path="/flights/:flightId" element={<FlightDetailsPage />} />
+        <Route path="/hotels/:hotelId" element={<HotelDetailsPage />} />
         <Route path="/aboutus" element={<Aboutus />} />
         <Route path="/denied" element={<Denied />} />
         <Route path="*" element={<NotFound />} />

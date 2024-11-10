@@ -32,13 +32,13 @@ const Homepage: React.FC = () => {
           {
             !isLoggedIn ? (
               <>
-                <li>
-                    <Link to="/signup" className="hover:text-gray-200">
-                      <UserPlus className="mr-2" /> Signup
+                <li className=" flex gap-5">
+                    <Link to="/signup" className="hover:text-gray-200 flex">
+                      <UserPlus className="mr-2" /> <p>Signup</p>
                     </Link>
 
-                    <Link to="/login" className="hover:text-gray-200">
-                      <UserPlus className="mr-2" /> Login
+                    <Link to="/login" className="hover:text-gray-200 flex">
+                      <UserPlus className="mr-2" /> <p>Login</p>
                     </Link>
                 </li>
               </>
@@ -66,9 +66,7 @@ const Homepage: React.FC = () => {
                 </li>
             )
           }
-          <li><Link to="/signup" className="hover:text-gray-200">SignUp</Link></li>
-          <li><Link to="/login" className="hover:text-gray-200">Login</Link></li>
-          <li><Link to="/profile" className="hover:text-gray-200">Profile</Link></li>
+        
         </ul>
       </nav>
 

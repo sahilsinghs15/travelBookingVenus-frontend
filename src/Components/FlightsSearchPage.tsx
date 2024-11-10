@@ -75,27 +75,32 @@ const FlightsSearchPage: React.FC = () => {
       </div>
 
       {/* Search Results */}
-      <div className="max-w-3xl mx-auto" onClick={()=> <Link to="/flightDetail" ></Link>}>
+      <div className="max-w-3xl mx-auto">
+        {/* <Link to={`/travel-packages/${travelPackage.package_id}`} key={travelPackage.package_id}></Link> */}
+
         {results.length > 0 ? (
           results.map((flight: { flight_id: React.Key | null | undefined; airline: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; flight_number: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; origin: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; destination: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; departure_time: string | number | Date; arrival_time: string | number | Date; price: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => (
-            <div key={flight.flight_id} className="bg-white p-6 mb-4 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold text-blue-800 mb-2">
-                {flight.airline} - {flight.flight_number}
-              </h3>
-              <p className="text-gray-700">
-                <span className="font-semibold">From:</span> {flight.origin}
-              </p>
-              <p className="text-gray-700">
-                <span className="font-semibold">To:</span> {flight.destination}
-              </p>
-              <p className="text-gray-700">
-                <span className="font-semibold">Departure:</span> {new Date(flight.departure_time).toLocaleString()}
-              </p>
-              <p className="text-gray-700">
-                <span className="font-semibold">Arrival:</span> {new Date(flight.arrival_time).toLocaleString()}
-              </p>
-              <p className="text-gray-700 font-semibold mt-2">Price: ${flight.price}</p>
-            </div>
+            <Link to={`/flights/${flight.flight_id}`} key={flight.flight_id}>
+            
+                <div key={flight.flight_id} className="bg-white p-6 mb-4 rounded-lg shadow-md">
+                <h3 className="text-xl font-semibold text-blue-800 mb-2">
+                    {flight.airline} - {flight.flight_number}
+                </h3>
+                <p className="text-gray-700">
+                    <span className="font-semibold">From:</span> {flight.origin}
+                </p>
+                <p className="text-gray-700">
+                    <span className="font-semibold">To:</span> {flight.destination}
+                </p>
+                <p className="text-gray-700">
+                    <span className="font-semibold">Departure:</span> {new Date(flight.departure_time).toLocaleString()}
+                </p>
+                <p className="text-gray-700">
+                    <span className="font-semibold">Arrival:</span> {new Date(flight.arrival_time).toLocaleString()}
+                </p>
+                <p className="text-gray-700 font-semibold mt-2">Price: ${flight.price}</p>
+                </div>
+            </Link>
           ))
         ) : (
           <p className="text-center text-gray-700 mt-8">No flights found matching the criteria.</p>
