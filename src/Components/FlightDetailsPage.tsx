@@ -1,7 +1,7 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import flightData from "../mockJSONFiles/flights.json";
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
+// Define a type for the flight object
 interface Flight {
   flight_id: number;
   flight_number: string;
@@ -16,52 +16,85 @@ interface Flight {
   aircraft: string;
   seat_availability: number;
   baggage_allowance: string;
+  description: string; // Add this if you have a description in the flights data
 }
 
-const FlightDetailsPage: React.FC = () => {
-  const { flightId } = useParams<{ flightId: string }>(); 
-  const flight: Flight|undefined = flightData.find(
-    (f) => f.flight_id === parseInt(flightId!)
-  ) as Flight | undefined;
+// Define the props type for the FlightDetailsPage component
+interface FlightDetailsPageProps {
+  flights: Flight[]; // Array of flights
+}
+
+const FlightDetailsPage: React.FC<FlightDetailsPageProps> = ({ flights }) => {
+  const { flightId } = useParams<{ flightId: string }>(); // UseParams with type
+
+  // Check if flightId exists and parse it
+  const flight = flightId ? flights.find((flight) => flight.flight_id === parseInt(flightId)) : undefined;
 
   if (!flight) {
-    return <div>Flight not found</div>;
+    return <div className="min-h-screen flex items-center justify-center bg-white text-gray-600 text-2xl">Flight not found</div>;
   }
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleString(); 
-  };
-
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-3xl font-bold text-blue-800 mb-4">
-          {flight.airline} - {flight.flight_number}
-        </h2>
-        <p className="text-gray-600 text-lg mb-2">
-          {flight.origin} ({flight.departure_time}) - {flight.destination} ({flight.arrival_time})
-        </p>
-        <p className="text-yellow-500 font-semibold mb-4">
-          Duration: {flight.duration} (Layovers: {flight.layovers})
-        </p>
+    <div
+      className="min-h-screen bg-cover bg-center relative"
+      style={{ backgroundImage: "url('https://images.pexels.com/photos/1157255/pexels-photo-1157255.jpeg?auto=compress&cs=tinysrgb&w=600')" }}
+    >
+      <div className="absolute inset-0 bg-black opacity-10"></div> {/* Overlay */}
 
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2">Flight Details</h3>
-          <ul className="list-disc pl-5 text-gray-600">
-            <li>Aircraft: {flight.aircraft}</li>
-            <li>Seat Availability: {flight.seat_availability}</li>
-            <li>Baggage Allowance: {flight.baggage_allowance}</li>
-          </ul>
+      <div className="relative z-10 p-8 flex items-center justify-center min-h-screen">
+        <div className="max-w-4xl w-full bg-black p-10 rounded-lg shadow-lg opacity-75">
+          <h2 className="text-5xl font-bold text-white mb-6 text-center">{flight.airline} {flight.flight_number}</h2>
+          <p className="text-center text-white text-2xl mb-6">{flight.origin} → {flight.destination}</p>
+          <p className="text-yellow-500 text-center font-semibold text-xl mb-6">Duration: {flight.duration}</p>
+
+          <div className="mb-10">
+            <h3 className="text-2xl font-semibold text-white mb-4">Flight Information</h3>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex flex-col text-white">
+                <span className="text-lg text-gray-400">Departure</span>
+                <span className="text-xl">{new Date(flight.departure_time).toLocaleString()}</span>
+              </div>
+              <div className="flex flex-col text-white">
+                <span className="text-lg text-gray-400">Arrival</span>
+                <span className="text-xl">{new Date(flight.arrival_time).toLocaleString()}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-10">
+            <h3 className="text-2xl font-semibold text-white mb-4">Price and Availability</h3>
+            <div className="flex justify-between text-white">
+              <div>
+                <span className="text-lg text-gray-400">Price</span>
+                <div className="text-3xl font-semibold">${flight.price}</div>
+              </div>
+              <div className="text-lg text-gray-400">{flight.seat_availability} seats available</div>
+            </div>
+          </div>
+
+          <div className="mb-10">
+            <h3 className="text-2xl font-semibold text-white mb-4">Baggage Allowance & Aircraft</h3>
+            <div className="text-white">
+              <span className="text-lg text-gray-400">Baggage Allowance</span>
+              <div className="text-xl">{flight.baggage_allowance}</div>
+            </div>
+            <div className="mt-4 text-white">
+              <span className="text-lg text-gray-400">Aircraft</span>
+              <div className="text-xl">{flight.aircraft}</div>
+            </div>
+          </div>
+
+          <div className="mb-10">
+            <h3 className="text-2xl font-semibold text-white mb-4">Flight Description</h3>
+            <p className="text-xl text-white">{flight.description}</p>
+          </div>
+
+          <div className="mt-8">
+            <button className="w-full py-4 text-2xl bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all">
+              Book Now
+            </button>
+          </div>
         </div>
-
-        <p className="text-2xl font-bold text-gray-700 my-6">
-          Price: ${flight.price}
-        </p>
-
-        <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700">
-          Book Now
-        </button>
       </div>
     </div>
   );

@@ -1,102 +1,135 @@
-import React, { useState } from "react";
-import Footer from "../Components/Footer";
-import { useSelector} from "react-redux";
-import { useNavigate , Link } from "react-router-dom";
-import { useAppDispatch } from "../Helpers/Hooks";
-import { RootState } from "../Redux/store";
-import { logout } from "../Redux/Slices/authSlice.reducer";
-import { ChevronDown, LogOut, User, UserPlus } from "lucide-react";
+import React from 'react';
+import Header from './Header';
+import Footer from '../Components/Footer';
+
+interface CategoryCardProps {
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
+const CategoryCard: React.FC<CategoryCardProps> = ({ title, description, imageUrl }) => (
+  <div className="bg-white shadow-md rounded-lg overflow-hidden">
+    <img src={imageUrl} alt={title} className="h-48 w-full object-cover" />
+    <div className="p-4">
+      <h3 className="text-xl font-bold mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
+    </div>
+  </div>
+);
+
+interface DestinationCardProps {
+  title: string;
+  imageUrl: string;
+}
+
+const DestinationCard: React.FC<DestinationCardProps> = ({ title, imageUrl }) => (
+  <div className="relative">
+    <img src={imageUrl} alt={title} className="h-64 w-full object-cover rounded-lg" />
+    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-4 rounded-b-lg">
+      <h3 className="text-lg font-bold">{title}</h3>
+    </div>
+  </div>
+);
 
 const Homepage: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const {isLoggedIn , data} = useSelector((state : RootState) => state.auth);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/login");
-  }
-
   return (
-    <div className="flex flex-col min-h-screen">
-      {/* Navbar */}
-      <nav className="bg-blue-600 text-white py-4 px-8 flex justify-between items-center">
-        <div className="text-2xl font-bold">TravelSite</div>
-        <ul className="flex space-x-8">
-          <li><Link to="/" className="hover:text-gray-200">Home</Link></li>
-          <li><Link to="/flights" className="hover:text-gray-200">Flights</Link></li>
-          <li><Link to="/hotels" className="hover:text-gray-200">Hotels</Link></li>
-          <li><Link to="/aboutus" className="hover:text-gray-200">About Us</Link></li>
-          {
-            !isLoggedIn ? (
-              <>
-                <li className=" flex gap-5">
-                    <Link to="/signup" className="hover:text-gray-200 flex">
-                      <UserPlus className="mr-2" /> <p>Signup</p>
-                    </Link>
+    <div className="bg-gray-100">
+      {/* Header Component */}
+      <Header />
 
-                    <Link to="/login" className="hover:text-gray-200 flex">
-                      <UserPlus className="mr-2" /> <p>Login</p>
-                    </Link>
-                </li>
-              </>
-            ) : (
-              <li className="relative">
-                  <button
-                    className="flex items-center hover:text-yellow-400"
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
-                  >
-                    <User className="mr-2" />
-                    <span>{data?.fullName}</span>
-                    <ChevronDown className={`ml-2 transform ${dropdownOpen ? "rotate-180" : ""}`} />
-                  </button>
-                  {dropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-lg py-2 z-10">
-                      <Link to="/profile" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Profile{<User/>}</Link>
-                      <button
-                        className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200"
-                        onClick={handleLogout}
-                      >
-                        <LogOut className="inline-block mr-2" /> Logout
-                      </button>
-                    </div>
-                  )}
-                </li>
-            )
-          }
-        
-        </ul>
-      </nav>
-
-      {/* Main Content */}
-      <main className="flex-grow text-center py-20 bg-gray-50">
-        <section className="px-4">
-          <h1 className="text-4xl font-bold text-blue-800 mb-4">Explore the World with Us</h1>
-          <p className="text-lg text-gray-600 mb-6">Find the best flights and hotels for your next adventure!</p>
-          <button className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700">Start Your Journey</button>
-        </section>
-      </main>
-
-      {/* Testimonials Section */}
-      <section className="bg-gray-50 py-12">
-        <h2 className="text-center text-3xl font-semibold text-blue-800 mb-8">What Our Customers Say</h2>
-        <div className="flex justify-center space-x-6 px-4">
-          <div className="w-80 p-6 bg-gray-100 rounded-lg shadow-md">
-            <p className="text-gray-700 mb-4">"Amazing experience! Found the best deals and had a smooth trip."</p>
-            <p className="text-blue-600 font-semibold">- Alice W.</p>
-          </div>
-          <div className="w-80 p-6 bg-gray-100 rounded-lg shadow-md">
-            <p className="text-gray-700 mb-4">"Very easy to book and great customer service. Highly recommended!"</p>
-            <p className="text-blue-600 font-semibold">- John D.</p>
-          </div>
-          <div className="w-80 p-6 bg-gray-100 rounded-lg shadow-md">
-            <p className="text-gray-700 mb-4">"Excellent platform for finding last-minute deals. Will use again!"</p>
-            <p className="text-blue-600 font-semibold">- Emma R.</p>
-          </div>
+      {/* Hero Section */}
+      <section
+        id="hero"
+        className="relative h-screen bg-cover bg-center flex items-center justify-center"
+        style={{ backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTALCxZdXHOO_Q9aPnn9rwpqrJghhBmE5yvpg&s')" }}
+      >
+        <div className="text-center text-white bg-gray-900 bg-opacity-50 p-8 rounded-lg">
+          <h1 className="text-5xl font-bold">Welcome to Tours & Travels</h1>
+          <p className="mt-4 text-lg">Experience the beauty of India with our curated travel packages.</p>
         </div>
       </section>
+
+      {/* Categories Section */}
+      <section id="categories" className="p-8 bg-white">
+        <h2 className="text-3xl font-bold text-center mb-8">Categories</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <CategoryCard title="Adventure Tours" description="Explore Indian adventure destinations." imageUrl="/path-to-adventure.jpg" />
+          <CategoryCard title="Historical Tours" description="Visit India's historical monuments." imageUrl="/path-to-historical.jpg" />
+          <CategoryCard title="Wildlife Safaris" description="Discover India's rich wildlife." imageUrl="/path-to-wildlife.jpg" />
+        </div>
+      </section>
+
+      {/* Destination Section with Horizontal Slideshow */}
+      <section id="destinations" className="p-8 bg-gray-100">
+        <h2 className="text-3xl font-bold text-center mb-8">Popular Destinations</h2>
+        <div className="overflow-x-scroll flex space-x-6">
+          <DestinationCard title="Goa" imageUrl="/path-to-goa.jpg" />
+          <DestinationCard title="Rajasthan" imageUrl="/path-to-rajasthan.jpg" />
+          <DestinationCard title="Kerala" imageUrl="/path-to-kerala.jpg" />
+          <DestinationCard title="Andaman" imageUrl="/path-to-andaman.jpg" />
+        </div>
+      </section>
+
+      {/* Key Features of Popular Locations Section */}
+      <section id="most-places" className="p-8 bg-white">
+        <h2 className="text-3xl font-bold text-center mb-8">Key Features of Popular Locations</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="p-8">
+              <h2 className="text-xl font-semibold mb-2">Goa Beaches</h2>
+              <p className="text-gray-600">Sun-kissed beaches and vibrant nightlife.</p>
+            </div>
+          </div>
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="p-8">
+              <h2 className="text-xl font-semibold mb-2">Jaipur's Heritage</h2>
+              <p className="text-gray-600">Royal palaces and forts of Jaipur.</p>
+            </div>
+          </div>
+          {/* Add more features here */}
+        </div>
+      </section>
+
+      {/* Tour Packages Section */}
+      <section id="tour-packages" className="p-8 bg-gray-100">
+        <h2 className="text-3xl font-bold text-center mb-8">Tour Packages</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <CategoryCard title="Weekend Getaways" description="Perfect for short trips." imageUrl="/path-to-weekend.jpg" />
+          <CategoryCard title="Luxury Tours" description="Experience luxury and comfort." imageUrl="/path-to-luxury.jpg" />
+          <CategoryCard title="Family Tours" description="Fun-filled trips for families." imageUrl="/path-to-family.jpg" />
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="p-12 bg-gradient-to-r from-blue-500 to-blue-700 text-center text-white">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold mb-6">Contact Us</h2>
+          <p className="text-lg mb-8">Have questions or need assistance? Reach out to us anytime!</p>
+          <form className="space-y-6">
+            <input type="text" placeholder="Your Name" className="w-full p-4 rounded-lg shadow-md text-gray-900" />
+            <input type="email" placeholder="Your Email" className="w-full p-4 rounded-lg shadow-md text-gray-900" />
+            <textarea placeholder="Your Message" className="w-full p-4 h-32 rounded-lg shadow-md text-gray-900 resize-none" />
+            <button className="w-full bg-white text-blue-700 px-6 py-3 rounded-full font-semibold text-lg hover:bg-blue-100 transition duration-300 shadow-lg">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* Comments Section */}
+      <section id="comments" className="p-8 bg-white">
+        <h2 className="text-3xl font-bold text-center mb-8">Happy Clients</h2>
+        <div className="space-y-6">
+          <div className="bg-gray-100 p-6 rounded-lg shadow-lg text-gray-800">
+            <p>"Fantastic experience! The tour was well-organized and enjoyable."</p>
+            <p className="mt-4 text-right font-semibold">- Client Name</p>
+          </div>
+          {/* Add more client comments */}
+        </div>
+      </section>
+
+      {/* Footer */}
       <Footer />
     </div>
   );
