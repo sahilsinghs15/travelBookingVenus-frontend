@@ -27,79 +27,104 @@ interface Hotel {
 }
 
 const HotelDetailsPage: React.FC = () => {
-  const { hotelId } = useParams<{ hotelId: string }>(); // Get hotelId from route
+  const { hotelId } = useParams<{ hotelId: string }>(); 
   const hotel: Hotel | undefined = hotelDetails.find((h) => h.id === parseInt(hotelId!));
 
   if (!hotel) {
-    return <div>Hotel not found</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white-75">
+        <p className="text-gray-600 text-2xl">Hotel not found</p>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-3xl font-bold text-blue-800 mb-4">{hotel.name}</h2>
-        <p className="text-gray-600 text-lg mb-2">{hotel.location}</p>
-        <p className="text-yellow-500 font-semibold mb-4">Rating: {hotel.rating} / 5</p>
+    <div
+      className="min-h-screen bg-cover bg-center relative"
+      style={{ backgroundImage: "url('https://www.holidify.com/images/cmsuploads/compressed/87694465_20220223165946.jpg')" }}
+    >
+      <div className="absolute inset-0 bg-black opacity-10"></div> {/* Overlay */}
+      
+      <div className="relative z-10 p-8 flex items-center justify-center min-h-screen">
+        <div className="max-w-4xl w-full bg-black p-10 rounded-lg shadow-lg opacity-75">
+          <h2 className="text-5xl font-bold text-white mb-6 text-center">
+            {hotel.name}
+          </h2>
+          <p className="text-center text-white text-2xl mb-6">{hotel.location}</p>
+          <p className="text-yellow-500 text-center font-semibold text-xl mb-6">
+            Rating: {hotel.rating} / 5
+          </p>
 
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2">Description</h3>
-          <p>{hotel.description}</p>
-        </div>
-
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2">Amenities</h3>
-          <ul className="list-disc pl-5 text-gray-600">
-            {hotel.amenities.map((amenity, index) => (
-              <li key={index}>{amenity}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2">Images</h3>
-          <div className="flex space-x-4">
-            {hotel.images.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                alt={`${hotel.name} image ${index + 1}`}
-                className="w-32 h-32 rounded-lg"
-              />
-            ))}
+          <div className="mb-10">
+            <h3 className="text-3xl font-semibold text-white mb-4">Description</h3>
+            <p className="text-white text-lg leading-relaxed">{hotel.description}</p>
           </div>
-        </div>
 
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2">Contact Information</h3>
-          <p className="flex items-center text-gray-600">
-            <FaPhone className="mr-2" /> {hotel.contact_info.phone}
-          </p>
-          <p className="flex items-center text-gray-600">
-            <FaEnvelope className="mr-2" /> {hotel.contact_info.email}
-          </p>
-          <p className="flex items-center text-gray-600">
-            <FaMapMarkerAlt className="mr-2" /> {hotel.contact_info.address}
-          </p>
-        </div>
+          <div className="mb-10">
+            <h3 className="text-3xl font-semibold text-white mb-4">Amenities</h3>
+            <ul className="flex flex-wrap gap-4 text-white text-lg">
+              {hotel.amenities.map((amenity, index) => (
+                <li key={index} className="bg-white-50 px-4 py-2 rounded-lg">
+                  {amenity}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2">Reviews</h3>
-          {hotel.reviews.map((review, index) => (
-            <div key={index} className="border-b border-gray-200 py-2">
-              <p className="font-semibold">{review.user}</p>
-              <p className="text-yellow-500">Rating: {review.rating} / 5</p>
-              <p className="text-gray-600">{review.comment}</p>
+          <div className="mb-10">
+            <h3 className="text-3xl font-semibold text-white mb-4">Image Gallery</h3>
+            <div className="grid grid-cols-3 gap-4">
+              {hotel.images.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`${hotel.name} image ${index + 1}`}
+                  className="w-full h-40 object-cover rounded-lg shadow-sm hover:shadow-lg transition-shadow duration-300"
+                />
+              ))}
             </div>
-          ))}
+          </div>
+
+          <div className="mb-10">
+            <h3 className="text-3xl font-semibold text-white mb-4">Contact Information</h3>
+            <div className="flex flex-col space-y-3 text-white text-lg">
+              <p className="flex items-center">
+                <FaPhone className="mr-2 text-blue-500" /> {hotel.contact_info.phone}
+              </p>
+              <p className="flex items-center">
+                <FaEnvelope className="mr-2 text-blue-500" /> {hotel.contact_info.email}
+              </p>
+              <p className="flex items-center">
+                <FaMapMarkerAlt className="mr-2 text-blue-500" /> {hotel.contact_info.address}
+              </p>
+            </div>
+          </div>
+
+          <div className="mb-10">
+            <h3 className="text-3xl font-semibold text-white mb-4">Customer Reviews</h3>
+            {hotel.reviews.length > 0 ? (
+              <div className="space-y-6">
+                {hotel.reviews.map((review, index) => (
+                  <div key={index} className="bg-gray-50 p-6 rounded-lg shadow-sm opacity-85">
+                    <p className="font-semibold text-blue-800 text-lg">{review.user}</p>
+                    <p className="text-yellow-500 text-lg">Rating: {review.rating} / 5</p>
+                    <p className="text-gray-700 text-lg">{review.comment}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-white text-lg">No reviews available.</p>
+            )}
+          </div>
+
+          <p className="text-3xl font-bold text-white mb-8 text-center">
+            Price per Night: ${hotel.price_per_night}
+          </p>
+
+          <button className="w-full bg-blue-600 text-white py-4 text-2xl rounded-lg font-bold hover:bg-blue-700 transition-all">
+            Book Now
+          </button>
         </div>
-
-        <p className="text-2xl font-bold text-gray-700 my-6">
-          Price per Night: ${hotel.price_per_night}
-        </p>
-
-        <button className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700">
-          Book Now
-        </button>
       </div>
     </div>
   );
