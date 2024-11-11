@@ -4,8 +4,7 @@ import { useAppDispatch } from "../Helpers/Hooks";
 import { updateProfile, logout, getUserData } from "../Redux/Slices/authSlice.reducer";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-//Profile Page
+import backgroundImage from "../Assets/backgroundimage-profile.jpg"; 
 
 export default function ProfilePage() {
   const dispatch = useAppDispatch();
@@ -35,11 +34,19 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6 flex justify-center">Profile</h1>
-      <div className="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto">
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      style={{ backgroundImage: `url(${backgroundImage})` }}
+    >
+      <div className="bg-white bg-opacity-90 shadow-xl rounded-lg p-8 max-w-lg mx-auto w-80">
+        <h1 className="text-4xl font-bold text-center text-primary mb-8">
+          User Profile
+        </h1>
+        
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-semibold mb-2">Full Name</label>
+          <label className="block text-gray-700 text-sm font-semibold mb-2">
+            Full Name
+          </label>
           <input
             type="text"
             value={fullName}
@@ -49,7 +56,9 @@ export default function ProfilePage() {
         </div>
 
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-semibold mb-2">Email</label>
+          <label className="block text-gray-700 text-sm font-semibold mb-2">
+            Email
+          </label>
           <input
             type="email"
             value={email}
@@ -59,7 +68,9 @@ export default function ProfilePage() {
         </div>
 
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-semibold mb-2">Phone Number</label>
+          <label className="block text-gray-700 text-sm font-semibold mb-2">
+            Phone Number
+          </label>
           <input
             type="text"
             value={phoneNumber}
@@ -68,34 +79,30 @@ export default function ProfilePage() {
           />
         </div>
 
-        <div className="flex flex-col sm:flex-row sm:justify-between gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
           <button
             onClick={handleProfileUpdate}
-            className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-dark transition duration-300 "
+            className="w-full bg-primary text-white font-semibold py-2 rounded-md hover:bg-primary-dark transition duration-300"
           >
             Update Profile
           </button>
 
           <button
             onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-300"
+            className="w-full bg-red-500 text-white font-semibold py-2 rounded-md hover:bg-red-600 transition duration-300"
           >
             Logout
           </button>
+        </div>
 
+        <div className="flex flex-col sm:flex-row justify-between items-center mt-6 gap-4">
           <Link
             to="/"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300 text-center"
+            className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 text-center"
           >
             Back To Home
           </Link>
 
-          <Link
-            to="/forgot-password"
-            className="text-primary underline text-center"
-          >
-            Forgot Password?
-          </Link>
         </div>
       </div>
     </div>

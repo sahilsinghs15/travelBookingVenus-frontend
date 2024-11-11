@@ -1,7 +1,10 @@
 import React from "react";
-import { useParams } from "react-router-dom"; 
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import hotelDetails from "../mockJSONFiles/hotels.json"; 
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import toast from "react-hot-toast";
+import { RootState } from "../Redux/store";
 
 interface Review {
   user: string;
@@ -29,6 +32,8 @@ interface Hotel {
 const HotelDetailsPage: React.FC = () => {
   const { hotelId } = useParams<{ hotelId: string }>(); 
   const hotel: Hotel | undefined = hotelDetails.find((h) => h.id === parseInt(hotelId!));
+
+  const {isLoggedIn} = useSelector((state : RootState) => state.auth);
 
   if (!hotel) {
     return (
@@ -121,7 +126,7 @@ const HotelDetailsPage: React.FC = () => {
             Price per Night: ${hotel.price_per_night}
           </p>
 
-          <button className="w-full bg-blue-600 text-white py-4 text-2xl rounded-lg font-bold hover:bg-blue-700 transition-all">
+          <button onClick={()=> (isLoggedIn) ? toast.success("Booking Successfully Completed!") : toast.error("Please Login to proceed booking!")} className="w-full bg-blue-600 text-white py-4 text-2xl rounded-lg font-bold hover:bg-blue-700 transition-all">
             Book Now
           </button>
         </div>

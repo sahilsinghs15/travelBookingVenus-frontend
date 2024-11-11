@@ -2,6 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import flightData from "../mockJSONFiles/flights.json";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { RootState } from "../Redux/store";
 
 interface Flight {
   flight_id: number;
@@ -30,6 +32,7 @@ const FlightDetailsPage: React.FC = () => {
 
   // Check if flightId exists and parse it
   const flight = flightId ? flightData.find((flight) => flight.flight_id === parseInt(flightId)) : undefined;
+  const {isLoggedIn} = useSelector((state : RootState) => state.auth);
 
   if (!flight) {
     return <div className="min-h-screen flex items-center justify-center bg-white text-gray-600 text-2xl">Flight not found</div>;
@@ -91,7 +94,7 @@ const FlightDetailsPage: React.FC = () => {
           </div>
 
           <div className="mt-8">
-            <button className="w-full py-4 text-2xl bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all">
+            <button onClick={()=> (isLoggedIn) ? toast.success("Booking Successfully Completed!") : toast.error("Please Login to proceed booking!")} className="w-full py-4 text-2xl bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all">
               Book Now
             </button>
           </div>
