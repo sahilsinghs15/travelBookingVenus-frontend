@@ -6,8 +6,9 @@ import { useAppDispatch } from "../Helpers/Hooks";
 import { RootState } from "../Redux/store";
 import { logout } from "../Redux/Slices/authSlice.reducer";
 import { ChevronDown, LogOut, User, UserPlus } from "lucide-react";
+import NextTrip from "../Components/NextTrip";
 
-const Homepage: React.FC = () => {
+const Homepage =  () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {isLoggedIn , data} = useSelector((state : RootState) => state.auth);
@@ -78,6 +79,10 @@ const Homepage: React.FC = () => {
           <button className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700">Start Your Journey</button>
         </section>
       </main>
+
+      {/* Next trip*/}
+
+      <NextTrip/>
 
       {/* Testimonials Section */}
       <section className="bg-gray-50 py-12">
